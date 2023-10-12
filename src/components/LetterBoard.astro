@@ -1,0 +1,45 @@
+---
+import Hexa from './Hexa.astro';
+
+const letras =
+[
+  ['A', 'B', 'C',],
+  ['D','E','F','G',],
+  ['H','I','J','K','L'],
+  ['M','N','O','P'],
+  ['Q','R','S'],
+]
+
+---
+
+<main>
+  {
+    letras.map(row => (
+      <div class={`grid-${row.length}`}>
+        {
+          row.map( value => (
+            <div class='hexa'>
+              <Hexa valor={value} clase='dark'/>
+            </div>
+          ))
+        }
+      </div>
+    ))
+  }
+</main>
+
+<style>
+  .grid-3, .grid-4, .grid-5 {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.hexa {
+		width: 100px;
+		height: 100px;
+		display: inline-block;
+		margin: -6px;
+		margin-top: -16px;
+	}
+</style>
+

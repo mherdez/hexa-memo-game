@@ -1,0 +1,32 @@
+---
+interface Props {
+	valor: string | number;
+  clase?: string;
+}
+
+const { valor, clase = 'light' } = Astro.props;
+---
+
+<div id='hexagono' class={clase}'>{valor}</div>
+
+<style>
+  div {
+    width: 100%;
+    aspect-ratio: 1/1;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+  }
+  .light {
+    color: rgb(17, 17, 17);
+    background: url(../assets/images/hex-white.svg) no-repeat center;
+  }
+  .dark {
+    color: #fefefe;
+    background: url(../assets/images/hex-black.svg) no-repeat center;
+  }
+
+</style>
