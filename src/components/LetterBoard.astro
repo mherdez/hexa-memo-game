@@ -11,15 +11,14 @@ const letras =
 ]
 
 ---
-
 <main>
   {
     letras.map(row => (
-      <div class={`grid-${row.length}`}>
+      <div class={`flex`}>
         {
           row.map( value => (
             <div class='hexa'>
-              <Hexa valor={value} clase='dark'/>
+              <Hexa valor={value} clase='dark' />
             </div>
           ))
         }
@@ -29,7 +28,7 @@ const letras =
 </main>
 
 <style>
-  .grid-3, .grid-4, .grid-5 {
+  .flex {
 		display: flex;
 		justify-content: center;
 		align-items: center;

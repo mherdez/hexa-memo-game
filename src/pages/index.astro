@@ -1,13 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import NumberBoard from '../components/NumberBoard.astro';
-import LetterBoard from '../components/LetterBoard.astro';
+import NumberBoard from '../components/NumberBoard.svelte';
+import Board from '../components/Board.svelte';
+
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<NumberBoard />
+		<NumberBoard client:idle />
+		<Board client:idle />
+
+
 		<!-- <LetterBoard /> -->
+		<!-- <NumberBoard /> -->
 	</main>
 </Layout>
 
@@ -21,7 +26,7 @@ import LetterBoard from '../components/LetterBoard.astro';
 		align-items: center;
 		flex-direction: column;
 		padding: 20px 0;
-		margin: 50px 20px;
+		margin: 50px auto;
 	}
 
 

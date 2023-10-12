@@ -1,18 +1,21 @@
----
-interface Props {
-	valor: string | number;
-  clase?: string;
-}
+<script>
+  export let valor;
+  export let tema = 'light';
+  export let handleClick;
 
-const { valor, clase = 'light' } = Astro.props;
----
-  <div id=`hexagono-${valor}` class={clase}>{valor}</div>
+</script>
+
+<button id="hexagono-{valor}" class={tema} on:click={() => handleClick(valor)}>
+  {valor}
+</button>
 
 <style>
-  div {
+  button {
+    border: none;
     width: 100%;
     aspect-ratio: 1/1;
     box-sizing: border-box;
+    cursor: pointer;
 
     display: flex;
     justify-content: center;
@@ -28,8 +31,7 @@ const { valor, clase = 'light' } = Astro.props;
     color: #fefefe;
     background: url(../assets/images/hex-black.svg) no-repeat center;
   }
-  div:hover {
-    cursor: pointer;
+  .seleccionada {
+    filter: invert(100%) sepia(100%) saturate(5000%) hue-rotate(305deg) brightness(100%) contrast(90%);
   }
-
 </style>
