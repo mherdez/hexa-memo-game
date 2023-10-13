@@ -16,7 +16,6 @@
     }
     const l = document.querySelector(`#hexagono-${id}`)
     l.classList.add('seleccionada')
-    l.style.color = 'white'
 
     readLetters.addLetters(id.toLowerCase());
     if( $readLetters.length === 3 ) viewTotal()

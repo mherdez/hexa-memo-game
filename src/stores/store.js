@@ -52,7 +52,13 @@ const sumas =
 
 const data = {};
 
-const arrSumas = sumas.map(terna => terna.split('')).map(item => item.reduce((acc, el) => acc + numeros.flat()[indice[el]], 0));
+const arrSumas = sumas.map(terna => terna.split('')).map(item => {
+  return {
+    terna: item.join(''),
+    suma: item.reduce((acc, el) => acc + numeros.flat()[indice[el]], 0)
+  }
+});
+console.log(arrSumas)
 
 arrSumas.map(valor => [data[valor] = (data[valor] || 0) + 1]);
 
