@@ -58,14 +58,43 @@ const arrSumas = sumas.map(terna => terna.split('')).map(item => {
     suma: item.reduce((acc, el) => acc + numeros.flat()[indice[el]], 0)
   }
 });
-console.log(arrSumas)
-
-arrSumas.map(valor => [data[valor] = (data[valor] || 0) + 1]);
-
-const sumaMaxima = Object.entries(data).sort((a, b) => b[1] - a[1])[0][0];
+// console.log(arrSumas)
 
 
+const createTernasDescubiertas = () => {
+  const { subscribe, update, set } = writable([]);
 
+  return {
+    subscribe,
+    update: (ternaDescubierta) => {
+      const ternaInversa = ternaDescubierta.split('').reverse().join('')
+      console.log({ternaInversa, ternaDescubierta})
+      update(terna => [...terna, ternaDescubierta, ternaInversa]);
+    }
+  };
+};
+export const ternasDescubiertas = createTernasDescubiertas();
+
+
+
+
+const createNumeroElejido = () => {
+  const { subscribe, update, set } = writable(0);
+  arrSumas.map(valor => [data[valor.suma] = (data[valor.suma] || 0) + 1]);
+
+  const sumaMaxima = Object.entries(data).sort((a, b) => b[1] - a[1])[0][0];
+
+  console.log(arrSumas, data, sumaMaxima)
+
+  return {
+    subscribe,
+    set: () => {
+      set(+sumaMaxima);
+    }
+  };
+};
+
+export const numeroElejido = createNumeroElejido();
 
 const createLetras = () => {
   const { subscribe, update, set } = writable([]);

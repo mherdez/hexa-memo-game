@@ -1,35 +1,78 @@
 <script>
-  import readLetters, {numbersBoard, lettersBoard, dataBoard,arraySumas } from '../stores/store';
+  import readLetters, {
+    ternasDescubiertas,
+    numbersBoard,
+    lettersBoard,
+    dataBoard,
+    arraySumas,
+    numeroElejido,
+  } from '../stores/store';
   import Hexa from './Hexa.svelte';
 
   lettersBoard.set();
   numbersBoard.set();
-  arraySumas.set()
-  dataBoard.set()
+  arraySumas.set();
+  dataBoard.set();
+  numeroElejido.set();
 
   const handleClick = (id) => {
-    if ($readLetters.includes(id.toLowerCase())) return
+    if ($readLetters.includes(id.toLowerCase())) return;
 
     if ($readLetters.length > 2) {
-      viewTotal()
+      viewTotal();
       return;
     }
-    const l = document.querySelector(`#hexagono-${id}`)
-    l.classList.add('seleccionada')
+    const l = document.querySelector(`#hexagono-${id}`);
+    l.classList.add('seleccionada');
 
     readLetters.addLetters(id.toLowerCase());
-    if( $readLetters.length === 3 ) viewTotal()
+    if ($readLetters.length === 3) viewTotal();
   };
 
   const viewTotal = () => {
     setTimeout(() => {
       readLetters.set();
-      document.querySelectorAll(".seleccionada").forEach( i => i.classList.remove('seleccionada'))
-    },3000)
+      document
+        .querySelectorAll('.seleccionada')
+        .forEach((i) => i.classList.remove('seleccionada'));
+    }, 2000);
 
-    console.log($arraySumas)
+    // const result =$arraySumas.map( ({ terna, suma }) => {
+    //   if( terna === $readLetters ) {
+    //     if( suma === $numeroElejido) {
+    //       console.log('Correcto')
+    //     } else {
+    //       console.log('Incorrecto')
+    //     }
+    //   }
+    //   return {terna: terna, suma:suma, numero: $numeroElejido}
+    // })
 
-  }
+    const result = $arraySumas.find(
+      ({ terna, suma }) => terna === $readLetters
+    );
+    if (!result) {
+      console.log('Selección incorrecta');
+      return;
+    }
+    // comprobar letras ya seleccionadas
+    const duplicada = $ternasDescubiertas.find(
+      (terna) => terna === $readLetters
+    );
+    if (duplicada) {
+      console.log('Selección duplicada');
+      return;
+    }
+
+    // -----------------
+    if (result.suma !== $numeroElejido) {
+      console.log('incorrecto', result, $readLetters, $numeroElejido);
+    } else {
+      console.log('correcto', result, $readLetters, $numeroElejido);
+      ternasDescubiertas.update($readLetters);
+    }
+    console.log($ternasDescubiertas);
+  };
 </script>
 
 <main>
@@ -37,11 +80,7 @@
     <div class={`flex`}>
       {#each row as value, i}
         <div class="hexa">
-          <Hexa
-            valor={value}
-            tema="dark"
-            handleClick={handleClick}
-          />
+          <Hexa valor={value} tema="dark" {handleClick} />
         </div>
       {/each}
     </div>
