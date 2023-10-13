@@ -57,6 +57,7 @@
     );
     if (!result) {
       console.log('Selección incorrecta');
+      letrero = 'Selección incorrecta';
       return;
     }
     // comprobar letras ya seleccionadas
@@ -65,6 +66,7 @@
     );
     if (duplicada) {
       console.log('Selección duplicada');
+      letrero = 'Selección duplicada';
       return;
     }
 

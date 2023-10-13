@@ -1,29 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import NumberBoard from '../components/NumberBoard.svelte';
-import Board from '../components/Board.svelte';
-import Number from '../components/Number.svelte';
-
-let showNumberBoard = false;
-
-setTimeout(() => {
-	showNumberBoard = false
-	console.log('hey')
-}, 3000);
+import MainBoards from '../components/MainBoards.svelte';
 
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		{
-			(showNumberBoard)
-			? <NumberBoard client:idle />
-			: <Board client:idle />
-		}
-
-
-		<!-- <LetterBoard /> -->
-		<!-- <NumberBoard /> -->
+		<MainBoards client:idle />
 	</main>
 </Layout>
 
