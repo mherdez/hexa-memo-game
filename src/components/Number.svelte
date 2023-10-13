@@ -8,7 +8,6 @@
 
 <style>
   h1 {
-    margin-bottom: 60px;
-    text-align: center;
+    margin: 0;
   }
 </style>

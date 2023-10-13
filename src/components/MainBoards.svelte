@@ -6,7 +6,7 @@
 
   setTimeout(() => {
     showNumberBoard = false;
-  }, 10000);
+  }, 20000);
 </script>
 
 <main>
@@ -20,7 +20,7 @@
 
 <style>
   .header {
-    margin-top: 120px;
+    margin-top: 115px;
   }
 </style>
 

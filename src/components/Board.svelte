@@ -6,6 +6,7 @@
     dataBoard,
     arraySumas,
     numeroElejido,
+    score
   } from '../stores/store';
   import Hexa from './Hexa.svelte';
     import Number from './Number.svelte';
@@ -39,7 +40,7 @@
         .querySelectorAll('.seleccionada')
         .forEach((i) => i.classList.remove('seleccionada'));
         letrero = ''
-    }, 2000);
+    }, 2500);
 
     // const result =$arraySumas.map( ({ terna, suma }) => {
     //   if( terna === $readLetters ) {
@@ -75,10 +76,12 @@
       // console.log('incorrecto', result, $readLetters, $numeroElejido);
       console.log('incorrecto');
       letrero = 'incorrecto'
+      score.subtract()
     } else {
       // console.log('correcto', result, $readLetters, $numeroElejido);
       console.log('correcto');
       letrero = 'correcto';
+      score.add()
       ternasDescubiertas.update($readLetters);
     }
     console.log($ternasDescubiertas);
@@ -87,6 +90,7 @@
 
 <main>
   <Number />
+  <h4>Puntos: <span class="{$score < 0 ? 'rojo' : 'verde'}">{$score}</span></h4>
   {#each $lettersBoard as row}
     <div class={`flex`}>
       {#each row as value, i}
@@ -112,8 +116,24 @@
     margin: -6px;
     margin-top: -16px;
   }
-  h3 {
+  main {
     text-align: center;
+  }
+  h3 {
+    font-size: 2.5rem;
+  }
+  h4 {
+    font-size: 1.5rem;
+    margin: 10px 0 40px;
+  }
+  span {
+    font-weight: bolder;
     font-size: 2rem;
+  }
+  .rojo {
+    color: rgb(171, 0, 0);
+  }
+  .verde {
+    color: rgb(0, 232, 0);
   }
 </style>

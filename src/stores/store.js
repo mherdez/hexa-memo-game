@@ -19,6 +19,30 @@ const readerLetters = createReadLetters();
 export default readerLetters;
 
 
+const createScore = () => {
+  const { subscribe, update, set } = writable(0);
+
+  return {
+    subscribe,
+    addLetters: (letter) => {
+      update(letters => letters + letter);
+    },
+    set: () => {
+      set();
+    },
+    add: () => {
+      update(score => score + 1)
+    },
+    subtract: () => {
+      update(score => score - 1)
+    },
+  };
+};
+
+export const score = createScore();
+
+
+
 // ------------------------------------------------
 
 const letras = [
