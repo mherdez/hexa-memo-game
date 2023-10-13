@@ -30,7 +30,7 @@ const letras = [
 ];
 
 
-const num = () => Math.floor(Math.random() * 10 + 1);
+const num = () => Math.floor(Math.random() * 9 + 1);
 
 const numeros =
   [
@@ -45,7 +45,7 @@ const indice = { a: 0, b: 1, c: 2, d: 3, e: 4, f: 5, g: 6, h: 7, i: 8, j: 9, k: 
 
 const sumas =
   ['abc', 'adh', 'aej', 'bei', 'bfk', 'cba', 'cfj', 'cgl',
-    'def', 'din', 'ein', 'eim', 'ejo', 'fed', 'fjn', 'fkp', 'gfe', 'gko',
+    'def', 'din', 'efg', 'eim', 'ejo', 'fed', 'fjn', 'fkp', 'gfe', 'gko',
     'hda', 'hij', 'hmq', 'ieb', 'ijk', 'inr', 'jea', 'jfc', 'jih', 'jkl', 'jnq', 'jos', 'kfb', 'kji', 'kor', 'lgc', 'lkj', 'lps',
     'mie', 'mno', 'nid', 'njf', 'nop', 'oje', 'okg', 'onm', 'pkf', 'pon',
     'qmh', 'qnj', 'qrs', 'rni', 'rok', 'soj', 'spl', 'srq'];
@@ -79,17 +79,18 @@ export const ternasDescubiertas = createTernasDescubiertas();
 
 
 const createNumeroElejido = () => {
-  const { subscribe, update, set } = writable(0);
+  const { subscribe, update, set } = writable({});
   arrSumas.map(valor => [data[valor.suma] = (data[valor.suma] || 0) + 1]);
 
-  const sumaMaxima = Object.entries(data).sort((a, b) => b[1] - a[1])[0][0];
-
-  console.log(arrSumas, data, sumaMaxima)
+  const sumaMaxima = +Object.entries(data).sort((a, b) => b[1] - a[1])[0][0];
+  const totalDeRespuestas = arrSumas.filter( ternas => ternas.suma === sumaMaxima)
+  // console.log({totalDeRespuestas})
+  // console.log({arrSumas}, {data}, {sumaMaxima})
 
   return {
     subscribe,
     set: () => {
-      set(+sumaMaxima);
+      set({sumaMaxima, totalDeRespuestas});
     }
   };
 };

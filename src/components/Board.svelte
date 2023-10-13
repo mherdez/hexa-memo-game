@@ -8,12 +8,15 @@
     numeroElejido,
   } from '../stores/store';
   import Hexa from './Hexa.svelte';
+    import Number from './Number.svelte';
 
   lettersBoard.set();
   numbersBoard.set();
   arraySumas.set();
   dataBoard.set();
   numeroElejido.set();
+
+  let letrero = ''
 
   const handleClick = (id) => {
     if ($readLetters.includes(id.toLowerCase())) return;
@@ -35,6 +38,7 @@
       document
         .querySelectorAll('.seleccionada')
         .forEach((i) => i.classList.remove('seleccionada'));
+        letrero = ''
     }, 2000);
 
     // const result =$arraySumas.map( ({ terna, suma }) => {
@@ -65,10 +69,14 @@
     }
 
     // -----------------
-    if (result.suma !== $numeroElejido) {
-      console.log('incorrecto', result, $readLetters, $numeroElejido);
+    if (result.suma !== $numeroElejido.sumaMaxima) {
+      // console.log('incorrecto', result, $readLetters, $numeroElejido);
+      console.log('incorrecto');
+      letrero = 'incorrecto'
     } else {
-      console.log('correcto', result, $readLetters, $numeroElejido);
+      // console.log('correcto', result, $readLetters, $numeroElejido);
+      console.log('correcto');
+      letrero = 'correcto';
       ternasDescubiertas.update($readLetters);
     }
     console.log($ternasDescubiertas);
@@ -76,6 +84,7 @@
 </script>
 
 <main>
+  <Number />
   {#each $lettersBoard as row}
     <div class={`flex`}>
       {#each row as value, i}
@@ -85,6 +94,7 @@
       {/each}
     </div>
   {/each}
+  <h3>{letrero}</h3>
 </main>
 
 <style>
@@ -99,5 +109,9 @@
     display: inline-block;
     margin: -6px;
     margin-top: -16px;
+  }
+  h3 {
+    text-align: center;
+    font-size: 2rem;
   }
 </style>
